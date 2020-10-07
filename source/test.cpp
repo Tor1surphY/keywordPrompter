@@ -9,8 +9,6 @@ using namespace ty;
 void testServer() {
     EchoServer server(4, 10, "192.168.160.128", 7777);
     server.start();
-    sleep(60);
-    server.stop();
 }
 
 int main() {

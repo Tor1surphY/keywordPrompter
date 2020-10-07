@@ -23,7 +23,7 @@ public:
         // in thread
         // send back can not run in threadpool
         // it has to be ran in eventloop
-
+        _msg.reserve();
         // Io thread and compute thread
         // should only do there own job
         _connection->sendInLoop(_msg);

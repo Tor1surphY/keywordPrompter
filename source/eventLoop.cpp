@@ -155,7 +155,7 @@ void EventLoop::runPendingFunctors() {
         AutoMutexLock auto_lock(_mutex);
         tmp.swap(_pending_functors);
     }
-    for(auto& functor : _pending_functors) {
+    for(auto& functor : tmp) {
         functor();
     }
 }

@@ -11,9 +11,9 @@ namespace ty
 EchoServer::EchoServer(int thread_num, int pool_size, const string& ip, unsigned int port)
 : _threadpool(thread_num, pool_size)
 , _server(ip, port){
-    _server.setConnectionCallback(onConnection);
-    _server.setMessageCallback(onMessage);
-    _server.setCloseCallback(onClose);
+    _server.setConnectionCallback(std::bind(&EchoServer::onConnection, this, std::placeholders::_1));
+    _server.setMessageCallback(std::bind(&EchoServer::onMessage, this, std::placeholders::_1));
+    _server.setCloseCallback(std::bind(&EchoServer::onClose, this, std::placeholders::_1));
 }
 
 void EchoServer::start() {
