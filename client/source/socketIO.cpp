@@ -68,7 +68,7 @@ int SocketIO::readLine(char* buff, int max_len) {
     while(left_len > 0) {
         int ret = recvPeek(_buff, left_len);
         if(ret > 0) {
-            for(int idx; idx < ret; ++idx) {
+            for(int idx = 0; idx < ret; ++idx) {
                 // if got a '\n', read all data before '\n' and '\n'
                 if(_buff[idx] == '\n') {
                     int len = idx + 1;

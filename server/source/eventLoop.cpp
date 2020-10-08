@@ -60,8 +60,9 @@ void EventLoop::waitEpollFd() {
         perror("epoll_wait");
         exit(1);
     }
-    else if(0 == ready_fd_num) 
-        printf("[epoll wait timeout]\n");
+    else if(0 == ready_fd_num){
+        // info
+    }
     else {
         // event list is not enough to recive fd
         if(ready_fd_num == _event_list.size()) {

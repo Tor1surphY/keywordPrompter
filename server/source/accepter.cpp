@@ -23,7 +23,7 @@ void Accepter::readyToListen() {
     setReuseAddr(true);
     setReusePort(true);
     bind();
-    cout << ">>> server started" << endl;
+    cout << "[server started]" << endl;
     listen();
 }
 

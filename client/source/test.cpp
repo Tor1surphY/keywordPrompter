@@ -13,9 +13,16 @@ void test() {
     connecter.connect();
     TcpConnection connection(connecter.fd());
     cout << connection.info();
-    connection.send("PSG.LGD's turn to pick!\n");
-    cout << connection.recv() << endl;
-    while(1);
+    string msg;
+    while(1) {
+        cout << "input: \"do quit\" to quit" << endl;
+        getline(cin, msg);
+        if(msg == "do quit") break;
+        msg += '\n';
+        connection.send(msg);
+        cout << "recived from server: ";
+        cout << connection.recv() << endl;
+    }
 }
 
 int main() {
