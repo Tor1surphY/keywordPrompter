@@ -2,7 +2,6 @@
 #include "../../include/query_offline/queryResult.hpp"
 
 #include <iostream>
-#include <fstream>
 #include <sstream>
 
 using std::endl;
