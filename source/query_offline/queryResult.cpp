@@ -1,5 +1,5 @@
-#include "../include/queryResult.hpp"
-#include "../include/textQuery.hpp"
+#include "../../include/query_offline/queryResult.hpp"
+#include "../../include/query_offline/textQuery.hpp"
 
 #include <iostream>
 

@@ -27,10 +27,13 @@ public:
     TextQuery(string&);
     QueryResult query(const string&) const;
 
+    void generateDictionary();
+    void generateIndex();
+
 private:
     ifstream _is;
-    shared_ptr<vector<string>> file;              // store file by lines
-    map<string, shared_ptr<set<line_no>>> wm;     // record every words and its line no. set
+    shared_ptr<vector<string>> _file;              // store file by lines
+    map<string, shared_ptr<set<line_no>>> _wm;     // record every words and its line no. set
 };
 } // end of namespace ty
 #endif
