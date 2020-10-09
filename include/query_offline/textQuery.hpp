@@ -27,8 +27,8 @@ public:
     TextQuery(string&);
     QueryResult query(const string&) const;
 
-    void generateDictionary();
-    void generateIndex();
+    void getDic();
+    void getIdx();
 
 private:
     ifstream _is;

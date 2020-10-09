@@ -40,7 +40,7 @@ QueryResult TextQuery::query(const string& target) const {
     else                return QueryResult(target, loc->second, _file);
 }
 
-void TextQuery::generateDictionary() {
+void TextQuery::getDic() {
     string path = "/home/tor1/keywordPrompterForEncyclopediaSearch/lib/dictionary";
     ofstream ofs(path);
     for(auto& elem : _wm){

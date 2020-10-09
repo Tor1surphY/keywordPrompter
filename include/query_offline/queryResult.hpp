@@ -29,9 +29,6 @@ public:
     , lines(l)
     , file(f){}
     
-    set<line_no>::iterator begin() { return lines->begin(); }
-	set<line_no>::iterator end()   { return lines->end(); }
-    shared_ptr<vector<string>> getFile() { return file; }
 private:
     string target;
     shared_ptr<set<line_no>> lines;
