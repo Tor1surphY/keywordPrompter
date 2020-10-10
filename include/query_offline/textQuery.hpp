@@ -6,34 +6,44 @@
 #include <vector>
 #include <memory>
 #include <map>
-#include <set>
 
-using std::set;
 using std::map;
 using std::string;
 using std::vector;
 using std::shared_ptr;
-using std::ifstream;
 
 namespace ty
 {
 
-using line_no = vector<string>::size_type;
-
-class QueryResult;
-
 class TextQuery {
 public:
-    TextQuery(string&);
-    QueryResult query(const string&) const;
+    friend class QueryImplement;
 
-    void getDic();
-    void getIdx();
+    static TextQuery* getInstance(const string& path) {
+        if(_p_instance == nullptr) {
+            _p_instance = new TextQuery(path);
+        }
+        return _p_instance;
+    }
+    static void destory() {
+        if(_p_instance != nullptr) {
+            delete _p_instance;
+            _p_instance = nullptr;
+        }
+    }
+
+    void loadData();
 
 private:
-    ifstream _is;
-    shared_ptr<vector<string>> _file;              // store file by lines
-    map<string, shared_ptr<set<line_no>>> _wm;     // record every words and its line no. set
+    TextQuery(const string& path)
+    : _path(path) {}
+
+private:
+    static TextQuery* _p_instance;
+
+    string _path;
+    map<string, int> _dic;
+    map<char, vector<string>> _idx;
 };
 } // end of namespace ty
 #endif

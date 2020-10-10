@@ -83,12 +83,15 @@ void InitConfig::writeInDic(string& file) {
         string word;
         istringstream iss(line);
         while(iss >> word) {
+            if(word.size() <= 2) continue;
             if(
                 ('A' <= word[0] && word[0] <= 'Z') ||
                 ('a' <= word[0] && word[0] <= 'z')
             ) {
-                if('A' <= word[0] && word[0] <= 'Z') {
-                    word[0] += 32;
+                for(int i = 0; i < word.size(); ++i) {
+                    if('A' <= word[i] && word[i] <= 'Z') {
+                        word[i] += 32;
+                    }
                 }
                 for(int i = 0; i < word.size(); ++i) {
                     if(('a' <= word[i] && word[i] <= 'z') == 0) {
@@ -96,6 +99,7 @@ void InitConfig::writeInDic(string& file) {
                         break;
                     }
                 }
+                if(word.size() <= 2) continue;
                 ++_word_frq[word];
                 _alp_frq[word[0]].insert(word);
             }

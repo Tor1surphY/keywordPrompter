@@ -1,56 +1,57 @@
 #include "../../include/query_offline/textQuery.hpp"
-#include "../../include/query_offline/queryResult.hpp"
 
 #include <iostream>
 #include <sstream>
 
+using std::cout;
 using std::endl;
+using std::ifstream;
 using std::ofstream;
 using std::istringstream;
 
 namespace ty
 {
 
-TextQuery::TextQuery(string& path)
-: _file(new vector<string>)
-, _is(path) {
-    string text;
-    while(getline(_is, text)) {
-        _file->push_back(text);
-        int n = _file->size()-1;
-        istringstream line(text);
-        string word;
-        while (line >> word) {
-            // auto == shared_ptr<set<int>>
-            auto& lines = _wm[word];
-            // when word not exist, init new set<line_no>
-            if(!lines) lines.reset(new set<line_no>);
-            lines->insert(n);
+TextQuery* TextQuery::_p_instance = nullptr;
+
+void TextQuery::loadData() {
+    cout << "---------------------------" << endl;
+    cout << "loading data..." << endl;
+
+    ifstream _dir(_path);
+    string dic_path, idx_path;
+    getline(_dir, dic_path);
+    getline(_dir, idx_path);
+    _dir.close();
+
+    cout << "initializing dictionary..." << endl;
+    {
+        ifstream dic(dic_path);
+        string line, word, frq;
+        while(getline(dic, line)) {
+            istringstream iss(line);
+            iss >> word >> frq;
+            ++_dic[word];
         }
+        dic.close();
     }
-}
 
-QueryResult TextQuery::query(const string& target) const {
-    // this no_data in case cannot find the target word
-    static
-    shared_ptr<set<line_no>> no_data(new set<line_no>);
-    auto loc = _wm.find(target);
-    // if cannot found, return this empty set
-    if(loc == _wm.end()) return QueryResult(target, no_data, _file);
-    else                return QueryResult(target, loc->second, _file);
-}
-
-void TextQuery::getDic() {
-    string path = "/home/tor1/keywordPrompterForEncyclopediaSearch/lib/dictionary";
-    ofstream ofs(path);
-    for(auto& elem : _wm){
-        ofs.setf(std::ios::left);
-        ofs << "|" ;
-        ofs.width(20);
-        ofs << elem.first << " ";
-        ofs.width(5);
-        ofs << elem.second << "|"<< endl;
+    cout << "initializing index..." << endl;
+    {
+        ifstream idx(idx_path);
+        char alp;
+        string line, word;
+        while(getline(idx, line)) {
+            istringstream iss(line);
+            iss >> alp;
+            while(iss >> word) {
+                _idx[alp].push_back(word);
+            }
+        }
+        idx.close();
     }
-    ofs.close();
+
+    cout << "loading finished" << endl;
+    cout << "---------------------------" << endl;
 }
 } // end of namespace ty
