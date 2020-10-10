@@ -1,7 +1,7 @@
-#include "../include/eventLoop.hpp"
-#include "../include/accepter.hpp"
-#include "../include/tcpConnection.hpp"
-#include "../include/thread.hpp"
+#include "../../include/server/eventLoop.hpp"
+#include "../../include/server/accepter.hpp"
+#include "../../include/server/tcpConnection.hpp"
+#include "../../include/server/thread.hpp"
 
 #include <unistd.h>
 #include <sys/eventfd.h>

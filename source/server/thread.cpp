@@ -1,4 +1,4 @@
-#include "../include/thread.hpp"
+#include "../../include/server/thread.hpp"
 
 using namespace std;
 

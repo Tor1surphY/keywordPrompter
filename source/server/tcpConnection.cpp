@@ -1,4 +1,4 @@
-#include "../include/tcpConnection.hpp"
+#include "../../include/server/tcpConnection.hpp"
 
 #include <string.h>
 

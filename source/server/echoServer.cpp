@@ -1,5 +1,5 @@
-#include "../include/echoServer.hpp"
-#include "../include/myTask.hpp"
+#include "../../include/server/echoServer.hpp"
+#include "../../include/server/myTask.hpp"
 
 #include <iostream>
 

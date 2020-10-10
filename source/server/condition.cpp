@@ -1,5 +1,5 @@
-#include "../include/condition.hpp"
-#include "../include/mutexLock.hpp"
+#include "../../include/server/condition.hpp"
+#include "../../include/server/mutexLock.hpp"
 
 #include <stdio.h>
 

@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <iostream>
 
-#include "../include/echoServer.hpp"
+#include "../../include/server/echoServer.hpp"
 
 using namespace std;
 using namespace ty;

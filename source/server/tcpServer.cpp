@@ -1,4 +1,4 @@
-#include "../include/tcpServer.hpp"
+#include "../../include/server/tcpServer.hpp"
 
 namespace ty
 {

@@ -1,4 +1,4 @@
-#include "../include/inetAddr.hpp"
+#include "../../include/server/inetAddr.hpp"
 
 #include <string.h>
 

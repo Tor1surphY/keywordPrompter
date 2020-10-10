@@ -1,9 +1,9 @@
 #ifndef __TY_THREADPOOL_H__
 #define __TY_THREADPOOL_H__
 
-#include "../include/thread.hpp"
-#include "../include/taskQueue.hpp"
-#include "../include/task.hpp"
+#include "thread.hpp"
+#include "taskQueue.hpp"
+#include "task.hpp"
 
 #include <memory>
 
