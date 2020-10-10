@@ -37,7 +37,7 @@ void InitConfig::generateDic() {
         file = _corpora_dir + "/" + file;
         writeInDic(file);
         fflush(stdout);
-        cout << '\r' << ++cnt;
+        cout << '\r' << ++cnt << " files";
     }
     cout << endl << "dictionary generated successed." << endl;
 }
