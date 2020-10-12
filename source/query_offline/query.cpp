@@ -13,12 +13,13 @@ void query(){
     string path = "/home/tor1/keywordPrompterForEncyclopediaSearch/config/textQuery";
     TextQuery* p_text_query = TextQuery::getInstance(path);
     p_text_query->loadData();
-    cout << "input your word: " << endl;
     string word;
     while(1) {
+        cout << "[input your word: ]" << endl;
         cin >> word;
         QueryImplement query(word, p_text_query);
         cout << query.promote() << endl;
+        cout << "-----------------------------------------" << endl;
     }
 }
 

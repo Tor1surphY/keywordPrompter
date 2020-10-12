@@ -5,13 +5,14 @@
 #include "threadpool.hpp"
 #include "tcpServer.hpp"
 
+#include "../query_offline/queryImplement.hpp"
+#include "../query_offline/textQuery.hpp"
+
 #include <string>
 #include <memory>
 
 namespace ty
 {
-
-
 
 class EchoServer {
 public:
@@ -19,7 +20,7 @@ public:
     using TcpConnectionCallback = function<const void(TcpConnectionPtr& connection)>;
 
     EchoServer();
-    EchoServer(int, int, const string&, unsigned int);
+    EchoServer(int, int, const string&, unsigned int, const string&);
 
     void start();
     void stop();
@@ -31,6 +32,8 @@ public:
 private:
     Threadpool _threadpool;
     TcpServer _server;
+    string _path;
+    TextQuery* _p_text_query;
 };
 } // end of namespace ty
 #endif

@@ -38,5 +38,4 @@ void TaskQueue::weakup() {
     _flag = false;
     _not_empty.notifyAll();
 }
-
 } // end of namespace ty

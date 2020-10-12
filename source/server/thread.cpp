@@ -1,5 +1,7 @@
 #include "../../include/server/thread.hpp"
 
+#include "../../include/query_offline/textQuery.hpp"
+
 using namespace std;
 
 namespace ty
@@ -8,6 +10,7 @@ namespace ty
 namespace current_thread
 {
 __thread const char* name = "ty thread";
+__thread TextQuery* p_text_query;
 }
 
 struct ThreadData {

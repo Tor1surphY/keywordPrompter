@@ -1,5 +1,10 @@
-#include "../include/tcpConnection.hpp"
-#include "../include/thread.hpp"
+#include "tcpConnection.hpp"
+#include "thread.hpp"
+
+#include "../query_offline/queryImplement.hpp"
+#include "../query_offline/textQuery.hpp"
+
+#include "../../source/query_offline/queryImplement.cpp"
 
 #include <iostream>
 
@@ -13,20 +18,22 @@ public:
     : _msg(msg)
     , _connection(connection) {}
 
-    void process() {
-        cout << "thread " << current_thread::name << " send back";
+    void process(TextQuery* p_text_query) {
+        cout << "thread " << current_thread::name << " compute" << endl;
         // _connection->send(_msg);
         // we only do:
-            // encode
-            // compute
             // decode
+            // compute
+            // encode
         // in thread
         // send back can not run in threadpool
         // it has to be ran in eventloop
-        _msg.reserve();
-        // Io thread and compute thread
+        // IO thread and compute thread
         // should only do there own job
-        _connection->sendInLoop(_msg);
+        string ans;
+        QueryImplement query(_msg, p_text_query);
+        ans = query.promote() + '\n';
+        _connection->sendInLoop(ans);
         // weakup()
         // setCallback() in eventloop
     }

@@ -15,9 +15,8 @@ void test() {
     cout << connection.info();
     string msg;
     while(1) {
-        cout << "input: \"do quit\" to quit" << endl;
-        getline(cin, msg);
-        if(msg == "do quit") break;
+        cout << "[input your word: ]" << endl;
+        cin >> msg;
         msg += '\n';
         connection.send(msg);
         cout << "recived from server: ";

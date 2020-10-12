@@ -1,5 +1,7 @@
 #include "../../include/query_offline/textQuery.hpp"
 
+#include <unistd.h>
+
 #include <iostream>
 #include <sstream>
 
@@ -53,5 +55,7 @@ void TextQuery::loadData() {
 
     cout << "loading finished" << endl;
     cout << "---------------------------" << endl;
+    sleep(1);
+    system("clear");
 }
 } // end of namespace ty
