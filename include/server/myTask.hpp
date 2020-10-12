@@ -7,6 +7,7 @@
 #include "../../source/query_offline/queryImplement.cpp"
 
 #include <iostream>
+#include <bitset>
 
 using namespace std;
 
@@ -32,8 +33,9 @@ public:
         // should only do there own job
         string ans;
         QueryImplement query(_msg, p_text_query);
-        ans = query.promote() + '\n';
-        _connection->sendInLoop(ans);
+        ans = query.promote();
+        bitset<32> size = ans.size();
+        _connection->sendInLoop(size.to_string() + ans);
         // weakup()
         // setCallback() in eventloop
     }

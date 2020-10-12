@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <sstream>
+#include <bitset>
+
 using namespace std;
 
 namespace ty
@@ -22,9 +24,11 @@ TcpConnection::~TcpConnection() {
 }
 
 string TcpConnection::recv() {
+    char size[32];
     char buff[65535];
-    _sock_io.readLine(buff, sizeof(buff));
-    //_sock_io.readN(buff, 1024);
+    _sock_io.readN(size, 32);
+    bitset<32> sz = atoi(size);
+    _sock_io.readN(buff, sz.to_ullong());
     return string(buff);
 }
 

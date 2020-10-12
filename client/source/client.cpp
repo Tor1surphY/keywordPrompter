@@ -2,10 +2,10 @@
 #include <json/json.h>
 
 #include <iostream>
+#include <bitset>
 
 #include "../include/connecter.hpp"
 #include "../include/tcpConnection.hpp"
-#include "../include/jsonPackup.hpp"
 
 using namespace std;
 using namespace ty;
@@ -19,10 +19,11 @@ void test() {
     while(1) {
         cout << "[input your word: ]" << endl;
         cin >> msg;
-        JsonPackup data_bag(msg);
-        string to_send = data_bag.packup();
-        int lenth = to_send.size();
-        connection.send(to_string(lenth) + to_send);
+        // protocol
+        {
+            bitset<32> size = msg.size();
+            connection.send(size.to_string() + msg);
+        }
         connection.recv();
     }
 }
