@@ -3,6 +3,7 @@
 
 #include "textQuery.hpp"
 
+#include <json/json.h>
 #include <string>
 
 using std::string;

@@ -7,6 +7,8 @@
             "args": [
                 "-g",
                 "${fileDirname}/*.cpp",
+                "-L/usr/local/lib",
+                "/usr/local/lib/libjson.a",
                 "-lpthread",
                 "-o",
                 "/home/tor1/keywordPrompterForEncyclopediaSearch/bin/${fileBasenameNoExtension}"

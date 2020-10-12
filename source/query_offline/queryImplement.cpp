@@ -35,21 +35,16 @@ string QueryImplement::promote() {
             }
         }
     }
-    
-    string result = "";
 
-    if(result_set.empty()) {
-        result = "no matching words found";
-        return result;
-    }
+    if(result_set.empty()) return "no matching words found";
     
+    Json::Value rsl;
     for(int i = 0; i < 5; ++i) {
         if(result_set.empty()) break;
-        result += (*result_set.begin()).second;
+        rsl.append((*result_set.begin()).second);
         result_set.erase(result_set.begin());
-        result += " ";
     }
-    return result;
+    return rsl.toStyledString().c_str();
 }
 
 int QueryImplement::shortestEditDistance(string& word1, string& word2) {
