@@ -1,6 +1,7 @@
 #include "../../include/server/tcpConnection.hpp"
 
 #include <string.h>
+#include <math.h>
 
 #include <iostream>
 #include <sstream>
@@ -25,11 +26,13 @@ TcpConnection::~TcpConnection() {
 
 string TcpConnection::recv() {
     char size[32];
-    char buff[65535];
+    memset(size, 0, 32);
     _sock_io.readN(size, 32);
-    bitset<32> sz = static_cast<int> (*size);
-    cout << sz << endl;
-    _sock_io.readN(buff, sz.to_ulong());
+    int data_len = convertToInt(string(size));
+    // cout << "data_len = " << data_len << endl;
+    char buff[65535];
+    memset(buff, 0, 65535);
+    _sock_io.readN(buff, data_len);
     return string(buff);
 }
 
@@ -113,5 +116,15 @@ bool TcpConnection::isDisconnected() {
     } while(ret == -1 && errno == EINTR);
     return ret == 0;
 
+}
+
+int TcpConnection::convertToInt(string s) {
+    int ret = 0;
+    for(int i = 0; i < 32; ++i) {
+        if(s[i] == '1') {
+            ret += pow(2, 31-i);
+        }
+    }
+    return ret;
 }
 } // end of namespace ty

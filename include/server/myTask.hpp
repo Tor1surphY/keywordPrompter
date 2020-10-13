@@ -35,6 +35,7 @@ public:
         QueryImplement query(_msg, p_text_query);
         ans = query.promote();
         bitset<32> size = ans.size();
+        // cout << size.to_string() + ans << endl;
         _connection->sendInLoop(size.to_string() + ans);
         // weakup()
         // setCallback() in eventloop

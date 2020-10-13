@@ -36,7 +36,7 @@ void EchoServer::onConnection(const TcpConnectionPtr& connection) {
 
 void EchoServer::onMessage(const TcpConnectionPtr& connection) {
     string msg = connection->recv();
-    cout << "server recived: " << msg;
+    cout << "server recived: " << msg << endl;
     MyTask task(msg, connection);
     _threadpool.addTask(bind(&MyTask::process, task, _p_text_query));
 }

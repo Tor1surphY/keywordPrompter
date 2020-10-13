@@ -26,6 +26,8 @@ private:
     InetAddr getLocalAddr(int);
     InetAddr getPeerAddr(int);
 
+    int convertToInt(string);
+
 private:
     Socket   _sock;
     SocketIO _sock_io;

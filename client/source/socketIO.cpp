@@ -42,7 +42,7 @@ int SocketIO::writeN(const char* buff, int len) {
         if(ret == -1 && errno == EINTR) continue;
 		else if(ret == -1) {
 			perror("read");
-			return len - left_len;
+			exit(1);
 		}
 		else {
 			left_len -= ret;
