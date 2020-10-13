@@ -36,6 +36,12 @@ void EchoServer::onConnection(const TcpConnectionPtr& connection) {
 
 void EchoServer::onMessage(const TcpConnectionPtr& connection) {
     string msg = connection->recv();
+    Json::Reader reader;
+    Json::Value  val;
+    if(reader.parse(msg, val)) {
+        Json::Value word = val["word"];
+        msg = word.asString();
+    }
     cout << "server recived: " << msg << endl;
     MyTask task(msg, connection);
     _threadpool.addTask(bind(&MyTask::process, task, _p_text_query));

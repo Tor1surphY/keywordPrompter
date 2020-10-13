@@ -22,6 +22,8 @@ void test() {
         cin >> msg;
         // protocol pack
         {
+            Json::Value val;
+            val["word"] = msg;
             bitset<32> size = msg.size();
             connection.send(size.to_string() + msg);
         }

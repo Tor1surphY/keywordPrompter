@@ -10,11 +10,8 @@ public:
     
     int readN(char*, int);
     int writeN(const char*, int);
-    int readLine(char*, int);
     int fd() const {    return _fd; }
-
-private:
-    int recvPeek(char*, int);
+    
 private:
     int _fd;
 };
