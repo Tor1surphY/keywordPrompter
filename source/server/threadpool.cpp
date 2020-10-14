@@ -26,9 +26,10 @@ void Threadpool::start() {
         ));
         _threadpool.push_back(move(thread));
     }
-
+    /*
     unique_ptr<Thread> timer_thread(new Thread(bind(&Timer::start(), this, _thread_num));
     _threadpool.push_back(timer_thread);
+    */
 
 
     for(auto& thread : _threadpool) thread->start();
