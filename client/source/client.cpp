@@ -33,9 +33,8 @@ void test() {
         // unpack
         {
             string msg = connection.recv();
-            // cout << msg;
             JsonUnpack unpacker(msg);
-            unpacker.unpack();
+            cout << unpacker.unpack() << endl;
         }
 
         cout << endl;

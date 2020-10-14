@@ -1,4 +1,4 @@
-#include "../../include/init/initConfig.hpp"
+#include "initConfig.hpp"
 
 using namespace ty;
 

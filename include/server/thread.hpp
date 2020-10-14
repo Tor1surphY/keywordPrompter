@@ -14,13 +14,13 @@ using ThreadCallback = function<void()>;
 
 namespace current_thread
 {
-extern __thread const char* name;
+extern __thread int __thread_number;
 } // end of current_thread
 
 class Thread
 : CannotCopy {
 public:
-    Thread(ThreadCallback&&, const string& name = string());
+    Thread(ThreadCallback&&, int);
     ~Thread();
 
     void start(); // 启动线程
@@ -34,7 +34,7 @@ private:
     pthread_t _pth_id;
     bool _is_running;
     ThreadCallback _cb;
-    string _name;
+    int _thread_number;
 };
 } // end of namespace ty
 #endif

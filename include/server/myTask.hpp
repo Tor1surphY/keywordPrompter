@@ -1,10 +1,10 @@
 #include "tcpConnection.hpp"
 #include "thread.hpp"
+#include "jsonUnpack.hpp"
 
 #include "../query_offline/queryImplement.hpp"
 #include "../query_offline/textQuery.hpp"
-
-#include "../../source/query_offline/queryImplement.cpp"
+#include "../cache/cacheManage.hpp"
 
 #include <iostream>
 #include <bitset>
@@ -19,26 +19,24 @@ public:
     : _msg(msg)
     , _connection(connection) {}
 
-    void process(TextQuery* p_text_query) {
-        cout << "thread " << current_thread::name << " compute" << endl;
-        // _connection->send(_msg);
-        // we only do:
-            // decode
-            // compute
-            // encode
-        // in thread
-        // send back can not run in threadpool
-        // it has to be ran in eventloop
-        // IO thread and compute thread
-        // should only do there own job
+    void process(TextQuery* p_text_query, CacheManage& _cache_manage) {
+        cout << "thread " << current_thread::__thread_number << " working" << endl;
         string ans;
-        QueryImplement query(_msg, p_text_query);
-        ans = query.promote();
-        bitset<32> size = ans.size();
-        // cout << size.to_string() + ans << endl;
-        _connection->sendInLoop(size.to_string() + ans);
-        // weakup()
-        // setCallback() in eventloop
+        Cache* p_cache = _cache_manage.getCache(current_thread::__thread_number);
+        ans = p_cache->get(_msg);
+        if(ans != "not found") {
+            bitset<32> size = ans.size();
+            _connection->sendInLoop(size.to_string() + ans);
+            cout << "found in cache" << endl;
+        }
+        else {
+            QueryImplement query(_msg, p_text_query);
+            ans = query.promote();
+            p_cache->put(_msg, ans);
+            bitset<32> size = ans.size();
+            _connection->sendInLoop(size.to_string() + ans);
+            cout << "found in RAM" << endl;
+        }
     }
 
 private:

@@ -9,38 +9,36 @@ namespace ty
 
 namespace current_thread
 {
-__thread const char* name = "ty thread";
-__thread TextQuery* p_text_query;
+__thread int __thread_number;
 }
 
 struct ThreadData {
-    ThreadData(const string& name, const ThreadCallback& cb)
-    : _name(name)
+    ThreadData(int thread_number, const ThreadCallback& cb)
+    : _thread_number(thread_number)
     , _cb(cb) {}
 
     void runInThread() {
-        current_thread::name = ((_name == string()) ? "ty thread"
-                                                    :  _name.c_str());
+        current_thread::__thread_number = _thread_number;
         if(_cb) _cb();
     }
 
-    string _name;
+    int _thread_number;
     ThreadCallback _cb;
 };
 
 
-Thread::Thread(ThreadCallback&& cb, const string& name)
+Thread::Thread(ThreadCallback&& cb, int __thread_number)
 : _pth_id(0)
 , _is_running(0) 
 , _cb(move(cb))
-, _name(name) {}
+, _thread_number(__thread_number) {}
 
 Thread::~Thread() {
     if(_is_running) pthread_detach(_pth_id);
 }
 
 void Thread::start() {
-    ThreadData* pdata = new ThreadData(_name, _cb);
+    ThreadData* pdata = new ThreadData(_thread_number, _cb);
     if(pthread_create(&_pth_id, nullptr, threadFnc, pdata)) {
         perror("pthread create");
         return;

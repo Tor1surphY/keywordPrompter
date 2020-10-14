@@ -22,10 +22,14 @@ void Threadpool::start() {
     for(size_t idx = 0; idx != _thread_num; ++idx) {
         unique_ptr<Thread> thread(new Thread(
             bind(&Threadpool::threadFunc, this),
-            to_string(idx)
+            idx
         ));
         _threadpool.push_back(move(thread));
     }
+
+    unique_ptr<Thread> timer_thread(new Thread(bind(&Timer::start(), this, _thread_num));
+    _threadpool.push_back(timer_thread);
+
 
     for(auto& thread : _threadpool) thread->start();
 }

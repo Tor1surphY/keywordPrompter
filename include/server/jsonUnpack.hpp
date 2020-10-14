@@ -26,6 +26,7 @@ public:
                 ret += elem.asString() + "  ";
             }
         }
+        return ret;
     }
 
 private:
