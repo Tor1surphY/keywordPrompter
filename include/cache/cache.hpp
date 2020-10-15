@@ -10,7 +10,22 @@ using std::unordered_map;
 namespace ty
 {
 
-struct Node;
+struct Node {
+    string key;
+    string value;
+    Node* front;
+    Node* back;
+    
+    Node()
+    : key("0")
+    , value("-1")
+    {}
+
+    Node(string _key, string _value)
+    : key(_key)
+    , value(_value)
+    {}
+};
 
 class Cache {
 public:
@@ -18,6 +33,7 @@ public:
 
     string get(string);
     void put(string, string);
+    Node* getHead() {   return _head;   }
 
 private:
     void addToHead(Node*);

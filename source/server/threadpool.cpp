@@ -1,4 +1,5 @@
 #include "../../include/server/threadpool.hpp"
+#include "../../include/cache/timerThread.hpp"
 
 #include <unistd.h>
 
@@ -9,8 +10,9 @@ Threadpool::Threadpool(size_t thread_num, size_t queue_size)
 : _thread_num(thread_num)
 , _queue_size(queue_size)
 , _task_queue(_queue_size)
-, _threadpool()
-, _exited(false) {
+, _timer_thread(new TimerThread(60, 60, TimerThread::timerFunc, _thread_num))
+, _exited(false) 
+, _cache_manager(thread_num, 10) {
     _threadpool.reserve(_thread_num); // 开辟空间
 }
 
@@ -19,6 +21,7 @@ Threadpool::~Threadpool() {
 }
 
 void Threadpool::start() {
+    _cache_manager.init();
     for(size_t idx = 0; idx != _thread_num; ++idx) {
         unique_ptr<Thread> thread(new Thread(
             bind(&Threadpool::threadFunc, this),
@@ -26,13 +29,8 @@ void Threadpool::start() {
         ));
         _threadpool.push_back(move(thread));
     }
-    /*
-    unique_ptr<Thread> timer_thread(new Thread(bind(&Timer::start(), this, _thread_num));
-    _threadpool.push_back(timer_thread);
-    */
-
-
     for(auto& thread : _threadpool) thread->start();
+    _timer_thread->start();
 }
 
 void Threadpool::stop() {

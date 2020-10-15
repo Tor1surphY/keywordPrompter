@@ -19,10 +19,11 @@ public:
     : _msg(msg)
     , _connection(connection) {}
 
-    void process(TextQuery* p_text_query, CacheManage& _cache_manage) {
+    void process(TextQuery* p_text_query, Threadpool* p_threadpool) {
         cout << "thread " << current_thread::__thread_number << " working" << endl;
         string ans;
-        Cache* p_cache = _cache_manage.getCache(current_thread::__thread_number);
+        Cache* p_cache = p_threadpool->getCache(current_thread::__thread_number);
+
         ans = p_cache->get(_msg);
         if(ans != "not found") {
             bitset<32> size = ans.size();

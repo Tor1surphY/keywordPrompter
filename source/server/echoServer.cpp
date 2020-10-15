@@ -12,17 +12,15 @@ EchoServer::EchoServer(int thread_num, int pool_size, const string& ip, unsigned
 : _threadpool(thread_num, pool_size)
 , _server(ip, port)
 , _path(path) 
-, _cache_manage(thread_num, 10) {
+,  _p_text_query(TextQuery::getInstance(_path)) {
     _server.setConnectionCallback(std::bind(&EchoServer::onConnection, this, std::placeholders::_1));
     _server.setMessageCallback(std::bind(&EchoServer::onMessage, this, std::placeholders::_1));
     _server.setCloseCallback(std::bind(&EchoServer::onClose, this, std::placeholders::_1));
-    _p_text_query = TextQuery::getInstance(_path);
 }
 
 void EchoServer::start() {
     _p_text_query->loadData();
     _threadpool.start();
-    _cache_manage.init();
     _server.startServer();
 }
 
@@ -44,7 +42,7 @@ void EchoServer::onMessage(const TcpConnectionPtr& connection) {
     }
     cout << "server recived: " << msg << endl;
     MyTask task(msg, connection);
-    _threadpool.addTask(bind(&MyTask::process, task, _p_text_query, _cache_manage));
+    _threadpool.addTask(bind(&MyTask::process, task, _p_text_query, &_threadpool));
 }
 
 void EchoServer::onClose(const TcpConnectionPtr& connection) {

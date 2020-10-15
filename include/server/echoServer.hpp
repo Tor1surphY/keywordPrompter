@@ -4,7 +4,6 @@
 #include "tcpConnection.hpp"
 #include "threadpool.hpp"
 #include "tcpServer.hpp"
-#include "../cache/cacheManage.hpp"
 
 #include "../query_offline/queryImplement.hpp"
 #include "../query_offline/textQuery.hpp"
@@ -35,7 +34,6 @@ private:
     TcpServer _server;
     string _path;
     TextQuery* _p_text_query;
-    CacheManage _cache_manage;
 };
 } // end of namespace ty
 #endif

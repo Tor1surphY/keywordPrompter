@@ -5,23 +5,6 @@ using std::pair;
 namespace ty
 {
 
-struct Node {
-    string key;
-    string value;
-    Node* front;
-    Node* back;
-    
-    Node()
-    : key("0")
-    , value("-1")
-    {}
-
-    Node(string _key, string _value)
-    : key(_key)
-    , value(_value)
-    {}
-};
-
 Cache::Cache(int capacity) 
 : _capacity(capacity)
 , _size(0) {
