@@ -64,7 +64,7 @@ void CacheManage::unify() {
 void CacheManage::store() {
     ofstream ofs("/home/tor1/keywordPrompterForEncyclopediaSearch/config/cache");
     for(auto& elem: _cold_cache) {
-        ofs << elem.first << " " << elem.second;
+        ofs << elem.first << " " << elem.second << endl;
     }
     ofs.close();
 }
