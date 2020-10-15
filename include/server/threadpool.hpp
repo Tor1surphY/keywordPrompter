@@ -9,13 +9,13 @@
 
 #include <memory>
 
-using namespace std;
+using std::unique_ptr;
+using std::vector;
 
 namespace ty
 {
 
 class Threadpool {
-    friend class WorkerThread;
 public:
     Threadpool(size_t, size_t);
     ~Threadpool();
