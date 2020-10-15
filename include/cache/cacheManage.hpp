@@ -23,6 +23,7 @@ public:
     {}
 
     void init();
+    void loadConfig();
 
     Cache* getCache(int thread_number) {    return _cache_vec[thread_number];   }
     void updateCache();

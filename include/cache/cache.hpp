@@ -33,6 +33,7 @@ public:
 
     string get(string);
     void put(string, string);
+    void loadInConfig(unordered_map<string, string>&);
     Node* getHead() {   return _head;   }
 
 private:

@@ -42,6 +42,12 @@ void Cache::put(string key, string value) {
     }
 }
 
+void Cache::loadInConfig(unordered_map<string, string>& cold_cache) {
+    for(auto& elem: cold_cache) {
+        put(elem.first, elem.second);
+    }
+}
+
 void Cache::addToHead(Node* tmp) {
     tmp->back = _head;
     _head->front = tmp;

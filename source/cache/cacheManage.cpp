@@ -2,19 +2,39 @@
 
 #include <unistd.h>
 
+#include <sstream>
 #include <iostream>
 #include <fstream>
 
 using std::cout;
 using std::endl;
+using std::ifstream;
 using std::ofstream;
+using std::stringstream;
 
 namespace ty
 {
 
 void CacheManage::init() {
+    loadConfig();
     for(auto& cache: _cache_vec) {
         cache = new Cache(_capacity);
+        cache->loadInConfig(_cold_cache);
+    }
+}
+
+void CacheManage::loadConfig() {
+    ifstream ifs("/home/tor1/keywordPrompterForEncyclopediaSearch/config/cache");
+    string line, promoted, wd;
+    while(getline(ifs, line)) {
+        stringstream word(line);
+        word >> wd;
+        word >> promoted;
+        getline(ifs, line);
+        promoted += line;
+        getline(ifs, line);
+        promoted += line;
+        _cold_cache[wd] = promoted;
     }
 }
 
@@ -28,7 +48,6 @@ void CacheManage::updateCache() {
 
 // private
 void CacheManage::unify() {
-    _cold_cache.clear();
     for(auto& child_cache: _cache_vec) {
         Cache copy_cahce = *child_cache;
         Node* tmp = copy_cahce.getHead();
