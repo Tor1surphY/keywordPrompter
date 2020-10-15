@@ -12,6 +12,8 @@ using std::unique_ptr;
 namespace ty
 {
 
+void timerFunc(Threadpool*);
+
 class TimerThread {
 public:
     TimerThread(int initial_time, int interval_time, TimerCallback&& cb, int thread_number)
@@ -23,8 +25,6 @@ public:
         _tiemr.stopTiemr();
         _thread.join();
     }
-
-    static void timerFunc();
 
 private:
     Timer _tiemr;

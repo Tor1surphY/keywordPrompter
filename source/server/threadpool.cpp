@@ -10,7 +10,7 @@ Threadpool::Threadpool(size_t thread_num, size_t queue_size)
 : _thread_num(thread_num)
 , _queue_size(queue_size)
 , _task_queue(_queue_size)
-, _timer_thread(new TimerThread(10, 20, TimerThread::timerFunc, _thread_num))
+, _timer_thread(new TimerThread(10, 20, bind(&timerFunc, this), _thread_num))
 , _exited(false) 
 , _cache_manager(thread_num, 10) {
     _threadpool.reserve(_thread_num); // 开辟空间

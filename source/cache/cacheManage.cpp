@@ -32,11 +32,12 @@ void CacheManage::unify() {
     for(auto& child_cache: _cache_vec) {
         Cache copy_cahce = *child_cache;
         Node* tmp = copy_cahce.getHead();
-        while(tmp->back->key != "0") {
+        while(tmp->key != "0" && tmp != nullptr) {
             if(_cold_cache.find(tmp->key) == _cold_cache.end()) {
                 _cold_cache[tmp->key] = tmp->value;
                 _new_data_list.push_back(make_pair(tmp->key, tmp->value));
             }
+            tmp = tmp->back;
         }
     }
 }

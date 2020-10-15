@@ -9,7 +9,7 @@ namespace ty
 {
 
 // static
-void TimerThread::timerFunc() {
-
+void timerFunc(Threadpool* p_threadpool) {
+    p_threadpool->updateCache();
 }
 } // end of namespace ty

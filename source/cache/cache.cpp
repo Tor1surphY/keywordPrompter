@@ -69,5 +69,5 @@ void Cache::moveToHead(Node* tmp) {
     ++_size;
 }
 
-void Cache::removeTail() { removeNode(_tail->front); }
+void Cache::removeTail() {  removeNode(_tail->front);   }
 } // end of namespace ty
