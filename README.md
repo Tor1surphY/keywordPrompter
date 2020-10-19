@@ -42,9 +42,12 @@ unify process, and copy back for every thread caceh.
 ![avatar](/picture/cache.png)
 
 ```
-(not implement yet) even I used the hot-cold cache mechanism, it still have the thread conflict problem. 
-So the expected solution is when the cache manager is running, 
-add a locker into the thread which is being cpoied, so that this thread will not work when it is processed. 
+(not implement yet)
+even I used the hot-cold cache mechanism,
+it still have the thread conflict problem.
+So the expected solution is when the cache manager is running,
+add a locker into the thread which is being cpoied,
+so that this thread will not work when it is processed.
 ```
 
 1. query model
@@ -64,7 +67,11 @@ Finally, return 5 shortest edit distance words.
 ![avatar](/picture/query.png)
 
 ```
-(not implement yet) the corpora will be Google search dataset, using tinyxml2 to decode xml files so that I can get a map with main entry and a vector which contains its all child entry								
+(not implement yet)
+the corpora will be Google search dataset,
+using tinyxml2 to decode xml files
+so that I can get a map with main entry
+and a vector which contains its all child entry								
 								
 ```
 
