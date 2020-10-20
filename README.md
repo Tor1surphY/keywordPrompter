@@ -21,8 +21,27 @@ that can prompte similar words relate to the requirement from client.
 
 The server system divided into three parts:
 
-1. multi-thread TCP model
-2. cache model
+#### 1. multi-thread TCP model
+
+The multi-thread TCP model has three parts.
+
+1. TCP connection model
+
+This model needs to listen and accept a new connection requirement and 
+build a new TCP connection. So that I can do the recive and send operation in this connection object. 
+Of courese, accroding to the BO design principles, the recive and send operation will implement in 
+another class which is SocketIO.
+
+![avatar](/picture/tcpconnection.png)
+
+2. eventloop model
+
+
+
+3. threadpool model
+
+
+#### 2. cache model
 
 The cache model is set in server system. 
 The final expected version of this model is a prompter in the application scenario of search engines, 
@@ -50,7 +69,7 @@ add a locker into the thread which is being cpoied,
 so that this thread will not work when it is processed.
 ```
 
-1. query model
+#### 3. query model
 
 This model based on the test program in C++ Primer.
 
