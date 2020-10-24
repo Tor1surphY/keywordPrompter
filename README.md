@@ -1,7 +1,7 @@
 # Keyword Prompter
 
 The *Keyword Prompter* is a server program 
-based on a multi-thread TCP network service model with caching mechanism
+based on a threadpool TCP network service model with caching mechanism
 that can prompte similar words relate to the requirement from client.
 
 *this README is more like a development note or a lenaring note*
@@ -23,7 +23,7 @@ The server system divided into three parts:
 
 #### 1. multi-thread TCP model
 
-The multi-thread TCP model has three parts.
+The threadpool TCP model has three parts.
 
 1. TCP connection model
 
