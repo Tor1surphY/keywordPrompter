@@ -56,7 +56,7 @@ For updating cache, I used LRU algorithm.
 To unify and update all the cache data, I set a timer thread in threadpool. It will unify and update 
 cache data regularly. To avoid thread confict, I set a cold cache in cache manager class. 
 When timer is weaked up, the manager will copy a set of data for ervery thread cache first, then run the 
-unify process, and copy back for every thread caceh. 
+unify process, and copy back for every thread cache. 
 
 ![avatar](/picture/cache.png)
 
