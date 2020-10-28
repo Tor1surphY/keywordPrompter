@@ -11,7 +11,7 @@
                 "/usr/local/lib/libjson.a",
                 "-lpthread",
                 "-o",
-                "/home/tor1/keywordPrompterForEncyclopediaSearch/bin/${fileBasenameNoExtension}"
+                "/home/tor1/keywordPrompter/bin/${fileBasenameNoExtension}"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
